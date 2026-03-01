@@ -18,8 +18,6 @@ import {
   Zap
 } from 'lucide-react';
 
-import TravelVisionBoard from './components/TravelVisionBoard';
-
 export default function App() {
   const courseName = "Passaporte Fluente em 90 Dias";
 
@@ -87,7 +85,7 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-15 mix-blend-multiply pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=60')] bg-cover bg-center opacity-10 mix-blend-multiply pointer-events-none"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           
           <motion.h1 
@@ -114,7 +112,7 @@ export default function App() {
             transition={{ delay: 0.2 }}
             className="relative w-full max-w-3xl mx-auto aspect-video bg-slate-900 rounded-2xl shadow-2xl overflow-hidden mb-8 group cursor-pointer"
           >
-            <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&w=1280&q=80" alt="Video Thumbnail" className="w-full h-full object-cover opacity-60 group-hover:opacity-50 transition-opacity" referrerPolicy="no-referrer" />
+            <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&w=1280&q=60" alt="Video Thumbnail" className="w-full h-full object-cover opacity-60 group-hover:opacity-50 transition-opacity" referrerPolicy="no-referrer" fetchPriority="high" decoding="async" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-20 h-20 bg-blue-700/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform shadow-lg">
                 <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
@@ -177,6 +175,8 @@ export default function App() {
                 alt="Viajante confuso" 
                 className="relative rounded-3xl shadow-lg object-cover w-full h-[500px]"
                 referrerPolicy="no-referrer"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -229,6 +229,8 @@ export default function App() {
                 alt="Teacher Hannah" 
                 className="rounded-2xl shadow-2xl object-cover w-full aspect-[3/4]"
                 referrerPolicy="no-referrer"
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="md:col-span-3">
@@ -241,10 +243,10 @@ export default function App() {
               </p>
               <div className="flex items-center gap-4">
                 <div className="flex -space-x-4">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" />
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" />
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" />
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" />
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
+                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
                 </div>
                 <p className="text-sm font-medium text-blue-200">
                   Junte-se a mais de <strong className="text-white">2.000 alunos</strong> que já viajaram sem medo.
@@ -276,9 +278,6 @@ export default function App() {
           </motion.button>
         </div>
       </section>
-
-      {/* AI Vision Board Section */}
-      <TravelVisionBoard />
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-12 text-center text-sm">
