@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 
 export default function App() {
-  const courseName = "Passaporte Fluente em 90 Dias";
+  const courseName = "Guia do Viajante";
 
   const headline = "O manual prático para você aprender a se virar em inglês antes do seu próximo embarque. Sem gramática chata, 100% focado na vida real";
 
@@ -68,8 +68,8 @@ export default function App() {
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-sm leading-none tracking-tight text-slate-900 uppercase">Inglês de</span>
-              <span className="font-black text-lg leading-none tracking-tight text-blue-700 uppercase">Sobrevivência</span>
+              <span className="font-extrabold text-sm leading-none tracking-tight text-slate-900 uppercase">Guia do</span>
+              <span className="font-black text-lg leading-none tracking-tight text-blue-700 uppercase">Viajante</span>
             </div>
           </div>
           <div className="hidden md:flex items-center gap-4 text-sm font-medium text-slate-600">
@@ -110,14 +110,16 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="relative w-full max-w-3xl mx-auto aspect-video bg-slate-900 rounded-2xl shadow-2xl overflow-hidden mb-8 group cursor-pointer"
+            className="relative w-full max-w-3xl mx-auto aspect-video bg-slate-900 rounded-2xl shadow-2xl overflow-hidden mb-8"
           >
-            <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&w=1280&q=60" alt="Video Thumbnail" className="w-full h-full object-cover opacity-60 group-hover:opacity-50 transition-opacity" referrerPolicy="no-referrer" fetchPriority="high" decoding="async" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 bg-blue-700/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform shadow-lg">
-                <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
-              </div>
-            </div>
+            <iframe 
+              className="w-full h-full absolute top-0 left-0"
+              src="https://www.youtube.com/embed/HtSGNBiCTqw?rel=0" 
+              title="Apresentação Guia do Viajante" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowFullScreen
+            ></iframe>
           </motion.div>
 
           <p className="text-sm font-medium text-slate-500 mb-8">
@@ -290,8 +292,8 @@ export default function App() {
               </div>
             </div>
             <div className="flex flex-col text-left">
-              <span className="font-extrabold text-sm leading-none tracking-tight text-slate-300 uppercase">Inglês de</span>
-              <span className="font-black text-lg leading-none tracking-tight text-white uppercase">Sobrevivência</span>
+              <span className="font-extrabold text-sm leading-none tracking-tight text-slate-300 uppercase">Guia do</span>
+              <span className="font-black text-lg leading-none tracking-tight text-white uppercase">Viajante</span>
             </div>
           </div>
           <p className="mb-4">© {new Date().getFullYear()} Teacher Hannah. Todos os direitos reservados.</p>
