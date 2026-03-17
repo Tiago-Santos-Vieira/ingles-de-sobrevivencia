@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 
 export default function App() {
+  const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
+
   const courseName = "Guia do Viajante";
 
   const headline = "O manual prático para você aprender a se virar em inglês antes do seu próximo embarque. Sem gramática chata, 100% focado na vida real";
@@ -85,7 +87,13 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=60')] bg-cover bg-center opacity-10 mix-blend-multiply pointer-events-none"></div>
+        <img 
+          src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=60" 
+          alt="Background" 
+          className="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-multiply pointer-events-none"
+          fetchPriority="high"
+          decoding="async"
+        />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           
           <motion.h1 
@@ -105,21 +113,40 @@ export default function App() {
             Esqueça a gramática chata e os anos de cursinho. Aprenda apenas o vocabulário prático e as frases exatas para se virar em aeroportos, hotéis e restaurantes.
           </motion.p>
 
-          {/* VSL Placeholder */}
+          {/* VSL Placeholder / Facade */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="relative w-full max-w-3xl mx-auto aspect-video bg-slate-900 rounded-2xl shadow-2xl overflow-hidden mb-8"
+            className="relative w-full max-w-3xl mx-auto aspect-video bg-slate-900 rounded-2xl shadow-2xl overflow-hidden mb-8 group cursor-pointer"
+            onClick={() => setIsVideoLoaded(true)}
           >
-            <iframe 
-              className="w-full h-full absolute top-0 left-0"
-              src="https://www.youtube.com/embed/HtSGNBiCTqw?rel=0" 
-              title="Apresentação Guia do Viajante" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              allowFullScreen
-            ></iframe>
+            {!isVideoLoaded ? (
+              <>
+                <img 
+                  src="https://img.youtube.com/vi/HtSGNBiCTqw/maxresdefault.jpg" 
+                  alt="Video Thumbnail" 
+                  className="w-full h-full object-cover opacity-80 group-hover:opacity-70 transition-opacity" 
+                  referrerPolicy="no-referrer" 
+                  fetchPriority="high"
+                  decoding="async" 
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-red-600/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform shadow-lg">
+                    <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <iframe 
+                className="w-full h-full absolute top-0 left-0"
+                src="https://www.youtube.com/embed/HtSGNBiCTqw?rel=0&autoplay=1" 
+                title="Apresentação Guia do Viajante" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowFullScreen
+              ></iframe>
+            )}
           </motion.div>
 
           <p className="text-sm font-medium text-slate-500 mb-8">
