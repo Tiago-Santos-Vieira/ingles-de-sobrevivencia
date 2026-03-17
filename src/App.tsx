@@ -23,7 +23,7 @@ export default function App() {
 
   const courseName = "Guia do Viajante";
 
-  const headline = "O manual prático para você aprender a se virar em inglês antes do seu próximo embarque. Sem gramática chata, 100% focado na vida real";
+  const headline = "O manual prático para você aprender a se virar em inglês antes do seu próximo embarque.";
 
   const ctaText = "Destravar meu inglês agora";
 
