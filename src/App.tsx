@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   Plane, 
   ShieldCheck, 
@@ -15,110 +15,132 @@ import {
   Utensils,
   CreditCard,
   HeartPulse,
-  Zap
+  Zap,
+  ArrowUp
 } from 'lucide-react';
 
 export default function App() {
   const [isVideoLoaded, setIsVideoLoaded] = React.useState(false);
+  const [showScrollTop, setShowScrollTop] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 200);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const courseName = "Guia do Viajante";
 
-  const headline = "O manual prático para você aprender a se virar em inglês antes do seu próximo embarque.";
-
-  const ctaText = "Destravar meu inglês agora";
+  const ctaText = "SIM! QUERO VIAJAR SEM PERRENGUE";
 
   const painPoints = [
-    "O pavor de ser barrado na imigração por não entender as perguntas do oficial.",
-    "O medo de pedir uma comida no restaurante e receber algo completamente diferente (ou pagar mais caro por engano).",
-    "A insegurança de se perder na rua e não conseguir pedir informações básicas para voltar ao hotel.",
-    "A frustração de depender de tradutores no celular ou de outras pessoas o tempo todo."
+    "O pavor de ser interrogado e barrado na imigração por não entender o oficial.",
+    "O constrangimento de apontar para o cardápio e torcer para a comida vir certa.",
+    "A frustração de depender do Google Tradutor ou de parentes para tudo.",
+    "O medo de uma emergência médica e não saber explicar o que está sentindo."
   ];
 
   const modules = [
     {
-      title: "Módulo 1: A Chegada e Imigração",
-      description: "Passo a passo para responder ao oficial com confiança, pegar as malas e sair do aeroporto sem estresse.",
+      title: "1. Imigração e Aeroporto Blindados",
+      description: "Passe pela alfândega com confiança, responda às perguntas certas e encontre suas malas sem suar frio.",
       icon: <ShieldCheck className="w-6 h-6 text-blue-700" />
     },
     {
-      title: "Módulo 2: Hospedagem sem Estresse",
-      description: "Como fazer check-in, check-out, pedir toalhas extras e resolver problemas no quarto do hotel.",
+      title: "2. Hospedagem Nível VIP",
+      description: "Faça check-in, exija seus direitos, peça serviço de quarto e resolva qualquer problema na recepção.",
       icon: <Hotel className="w-6 h-6 text-blue-700" />
     },
     {
-      title: "Módulo 3: Alimentação e Restaurantes",
-      description: "Como pedir sua comida, entender o cardápio, pedir a conta e lidar com alergias.",
+      title: "3. Gastronomia Sem Surpresas",
+      description: "Entenda cardápios complexos, faça pedidos específicos, peça a conta e lide com alergias alimentares com segurança.",
       icon: <Utensils className="w-6 h-6 text-blue-700" />
     },
     {
-      title: "Módulo 4: Compras, Transporte e Emergências",
-      description: "Como pechinchar, usar o metrô/táxi e pedir ajuda médica ou policial se precisar.",
+      title: "4. Compras, Transporte e Socorro",
+      description: "Negocie preços, pegue o transporte correto e saiba exatamente o que dizer em emergências médicas ou policiais.",
       icon: <CreditCard className="w-6 h-6 text-blue-700" />
     }
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-blue-200 selection:text-blue-900">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-red-200 selection:text-red-900">
       {/* Navbar / Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-md">
+            <div className="relative flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-700 to-blue-950 rounded-xl shadow-md">
               <Plane className="w-6 h-6 text-white transform rotate-12" />
               <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-red-600 rounded-full flex items-center justify-center border-2 border-white shadow-sm">
                 <Zap className="w-3 h-3 text-white" fill="currentColor" />
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-sm leading-none tracking-tight text-slate-900 uppercase">Guia do</span>
-              <span className="font-black text-lg leading-none tracking-tight text-blue-700 uppercase">Viajante</span>
+              <span className="font-heading font-extrabold text-sm leading-none tracking-tight text-blue-950 uppercase">Guia do</span>
+              <span className="font-heading font-black text-lg leading-none tracking-tight text-red-600 uppercase">Viajante</span>
             </div>
           </div>
-          <div className="hidden md:flex items-center gap-4 text-sm font-medium text-slate-600">
-            <a href="#metodo" className="hover:text-blue-700 transition-colors">O Método</a>
-            <a href="#modulos" className="hover:text-blue-700 transition-colors">Módulos</a>
-            <a href="#sobre" className="hover:text-blue-700 transition-colors">Sobre a Teacher</a>
+          <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
+            <a href="#metodo" className="hover:text-red-600 transition-colors">O Método</a>
+            <a href="#modulos" className="hover:text-red-600 transition-colors">Módulos</a>
+            <a href="#sobre" className="hover:text-red-600 transition-colors">Sobre a Teacher</a>
           </div>
-          <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition-all shadow-sm hover:shadow-md flex items-center gap-2">
-            {ctaText}
+          <button className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-full text-sm font-heading font-bold uppercase tracking-wide transition-all shadow-sm hover:shadow-md flex items-center gap-2">
+            Garantir Vaga
           </button>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden">
+      <section className="relative pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden bg-white">
         <img 
           src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=60" 
           alt="Background" 
-          className="absolute inset-0 w-full h-full object-cover opacity-10 mix-blend-multiply pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.03] mix-blend-multiply pointer-events-none"
           fetchPriority="high"
           decoding="async"
         />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-700 font-semibold text-sm mb-6"
+          >
+            <Globe className="w-4 h-4" />
+            <span>O passaporte para a sua independência</span>
+          </motion.div>
+
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight"
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-heading font-black tracking-tight text-blue-950 mb-6 leading-[1.1]"
           >
-            {headline}
+            Viaje para o exterior sem o <span className="text-red-600">medo de travar</span> no inglês na frente dos outros
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed"
+            transition={{ delay: 0.2 }}
+            className="text-lg md:text-xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed font-medium"
           >
-            Esqueça a gramática chata e os anos de cursinho. Aprenda apenas o vocabulário prático e as frases exatas para se virar em aeroportos, hotéis e restaurantes.
+            O único manual prático que te ensina a passar pela imigração, fazer pedidos e resolver perrengues. <strong className="text-blue-950">Sem gramática inútil, 100% focado na vida real.</strong>
           </motion.p>
 
           {/* VSL Placeholder / Facade */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="relative w-full max-w-3xl mx-auto aspect-video bg-slate-900 rounded-2xl shadow-2xl overflow-hidden mb-8 group cursor-pointer"
+            transition={{ delay: 0.3 }}
+            className="relative w-full max-w-3xl mx-auto aspect-video bg-blue-950 rounded-2xl shadow-2xl overflow-hidden mb-8 group cursor-pointer ring-4 ring-white"
             onClick={() => setIsVideoLoaded(true)}
           >
             {!isVideoLoaded ? (
@@ -132,8 +154,8 @@ export default function App() {
                   decoding="async" 
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 bg-red-600/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform shadow-lg">
-                    <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
+                  <div className="w-24 h-24 bg-red-600/90 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform shadow-2xl">
+                    <Play className="w-10 h-10 text-white ml-2" fill="currentColor" />
                   </div>
                 </div>
               </>
@@ -149,35 +171,36 @@ export default function App() {
             )}
           </motion.div>
 
-          <p className="text-sm font-medium text-slate-500 mb-8">
-            Assista ao vídeo acima e descubra o método exato que a Teacher Hannah criou para destravar o seu inglês antes do embarque.
+          <p className="text-sm font-semibold text-slate-500 mb-8 uppercase tracking-wider">
+            Assista ao vídeo e descubra o método
           </p>
 
           <motion.button 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="bg-red-600 hover:bg-red-700 text-white text-lg md:text-xl font-bold py-4 px-8 rounded-full shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 mx-auto w-full sm:w-auto"
+            className="bg-red-600 hover:bg-red-700 text-white text-lg md:text-xl font-heading font-black uppercase tracking-wide py-5 px-10 rounded-full shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_60px_-15px_rgba(220,38,38,0.7)] transition-all flex items-center justify-center gap-3 mx-auto w-full sm:w-auto"
           >
             {ctaText}
             <ArrowRight className="w-6 h-6" />
           </motion.button>
           
-          <div className="mt-6 flex items-center justify-center gap-2 text-sm text-slate-500 font-medium">
-            <ShieldCheck className="w-4 h-4 text-blue-700" />
-            <span>Garantia incondicional de 7 dias</span>
+          <div className="mt-6 flex items-center justify-center gap-2 text-sm text-slate-600 font-semibold">
+            <ShieldCheck className="w-5 h-5 text-blue-700" />
+            <span>Garantia incondicional de 7 dias • Acesso Imediato</span>
           </div>
         </div>
       </section>
 
       {/* Pain Points Section */}
-      <section id="metodo" className="py-20 bg-white">
+      <section id="metodo" className="py-24 bg-slate-50 border-y border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                Você se identifica com alguma destas situações?
+              <h2 className="text-3xl md:text-4xl font-heading font-black text-blue-950 mb-8 leading-tight">
+                Você vai deixar o idioma <span className="text-red-600">estragar a viagem</span> dos seus sonhos?
               </h2>
               <div className="space-y-6">
                 {painPoints.map((point, idx) => (
@@ -187,22 +210,24 @@ export default function App() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1 }}
-                    className="flex gap-4"
+                    className="flex gap-4 bg-white p-4 rounded-2xl shadow-sm border border-slate-100"
                   >
                     <div className="flex-shrink-0 mt-1">
-                      <AlertTriangle className="w-6 h-6 text-red-600" />
+                      <div className="w-8 h-8 bg-red-50 rounded-full flex items-center justify-center">
+                        <AlertTriangle className="w-4 h-4 text-red-600" />
+                      </div>
                     </div>
-                    <p className="text-lg text-slate-700 leading-relaxed">{point}</p>
+                    <p className="text-slate-700 font-medium leading-relaxed">{point}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
             <div className="relative">
-              <div className="absolute inset-0 bg-blue-100 rounded-3xl transform translate-x-4 translate-y-4"></div>
+              <div className="absolute inset-0 bg-blue-700 rounded-[2rem] transform translate-x-4 translate-y-4 opacity-10"></div>
               <img 
                 src="https://i.postimg.cc/QC8ytGcY/Gemini-Generated-Image-4dzpr74dzpr74dzp.png" 
                 alt="Viajante confuso" 
-                className="relative rounded-3xl shadow-lg object-cover w-full h-[500px]"
+                className="relative rounded-[2rem] shadow-2xl object-cover w-full h-[550px] border-4 border-white"
                 referrerPolicy="no-referrer"
                 loading="lazy"
                 decoding="async"
@@ -213,14 +238,14 @@ export default function App() {
       </section>
 
       {/* Modules Section */}
-      <section id="modulos" className="py-20 bg-slate-50">
+      <section id="modulos" className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              O que você vai aprender no <span className="text-blue-700">{courseName}</span>
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-blue-950 mb-6">
+              O seu roteiro exato para a <span className="text-blue-700">independência</span>
             </h2>
-            <p className="text-lg text-slate-600">
-              Um método direto ao ponto, dividido em 4 módulos práticos com tudo que você precisa para sobreviver no exterior.
+            <p className="text-lg text-slate-600 font-medium">
+              Um método direto ao ponto, dividido em 4 módulos práticos com tudo que você precisa para dominar as situações reais do exterior.
             </p>
           </div>
 
@@ -232,13 +257,13 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
+                className="bg-slate-50 p-8 rounded-3xl border border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all group"
               >
-                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                  {mod.icon}
+                <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform group-hover:bg-blue-700">
+                  {React.cloneElement(mod.icon, { className: "w-7 h-7 text-blue-700 group-hover:text-white transition-colors" })}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{mod.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{mod.description}</p>
+                <h3 className="text-xl font-heading font-bold text-blue-950 mb-3">{mod.title}</h3>
+                <p className="text-slate-600 leading-relaxed font-medium">{mod.description}</p>
               </motion.div>
             ))}
           </div>
@@ -246,39 +271,48 @@ export default function App() {
       </section>
 
       {/* Authority Section */}
-      <section id="sobre" className="py-20 bg-blue-900 text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-800 rounded-full blur-3xl opacity-50"></div>
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-blue-800 rounded-full blur-3xl opacity-50"></div>
+      <section id="sobre" className="py-24 bg-blue-950 text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-blue-800 rounded-full blur-3xl opacity-40"></div>
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-red-900 rounded-full blur-3xl opacity-20"></div>
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-5 gap-12 items-center">
+          <div className="grid md:grid-cols-5 gap-16 items-center">
             <div className="md:col-span-2">
-              <img 
-                src="https://i.postimg.cc/7h6K4Pn9/Gemini-Generated-Image-rs4s2grs4s2grs4s-(1).png" 
-                alt="Teacher Hannah" 
-                className="rounded-2xl shadow-2xl object-cover w-full aspect-[3/4]"
-                referrerPolicy="no-referrer"
-                loading="lazy"
-                decoding="async"
-              />
+              <div className="relative">
+                <div className="absolute inset-0 bg-red-600 rounded-[2rem] transform -translate-x-4 translate-y-4 opacity-20"></div>
+                <img 
+                  src="https://i.postimg.cc/7h6K4Pn9/Gemini-Generated-Image-rs4s2grs4s2grs4s-(1).png" 
+                  alt="Teacher Hannah" 
+                  className="relative rounded-[2rem] shadow-2xl object-cover w-full aspect-[3/4] border-4 border-blue-900"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
             <div className="md:col-span-3">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Muito prazer, eu sou a Teacher Hannah!</h2>
-              <p className="text-lg text-blue-100 mb-6 leading-relaxed">
-                Com anos de experiência ensinando inglês para adultos, percebi que a maioria dos cursos foca em regras gramaticais que você nunca vai usar na vida real.
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/50 border border-blue-800 text-blue-300 font-semibold text-sm mb-6 uppercase tracking-wider">
+                Sua co-piloto nesta jornada
+              </div>
+              <h2 className="text-3xl md:text-5xl font-heading font-black mb-6 leading-tight">
+                Muito prazer, eu sou a <span className="text-red-400">Teacher Hannah!</span>
+              </h2>
+              <p className="text-lg text-blue-100/90 mb-6 leading-relaxed font-medium">
+                Com anos de experiência ensinando inglês para adultos, percebi que a maioria dos cursos foca em regras gramaticais que você <strong className="text-white">nunca vai usar na vida real.</strong>
               </p>
-              <p className="text-lg text-blue-100 mb-8 leading-relaxed">
+              <p className="text-lg text-blue-100/90 mb-10 leading-relaxed font-medium">
                 Minha missão é te dar a chave para explorar o mundo com independência. Eu criei um método direto ao ponto, acolhedor e focado 100% na prática, para que você sinta segurança desde o momento em que pisar no avião.
               </p>
-              <div className="flex items-center gap-4">
+              
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 bg-blue-900/40 p-6 rounded-2xl border border-blue-800/50">
                 <div className="flex -space-x-4">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
-                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-12 h-12 rounded-full border-2 border-blue-900 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-14 h-14 rounded-full border-2 border-blue-950 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
+                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-14 h-14 rounded-full border-2 border-blue-950 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-14 h-14 rounded-full border-2 border-blue-950 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=60" alt="Aluno" className="w-14 h-14 rounded-full border-2 border-blue-950 object-cover" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
                 </div>
-                <p className="text-sm font-medium text-blue-200">
-                  Junte-se a mais de <strong className="text-white">2.000 alunos</strong> que já viajaram sem medo.
+                <p className="text-base font-medium text-blue-200 leading-snug">
+                  Junte-se a mais de <br/><strong className="text-white text-lg">2.000 alunos</strong><br/> que já viajaram sem medo.
                 </p>
               </div>
             </div>
@@ -287,20 +321,20 @@ export default function App() {
       </section>
 
       {/* Guarantee Section */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-8">
-            <ShieldCheck className="w-10 h-10 text-blue-700" />
+          <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl border border-slate-100">
+            <ShieldCheck className="w-12 h-12 text-blue-700" />
           </div>
-          <h2 className="text-3xl font-bold text-slate-900 mb-6">Garantia Incondicional de 7 Dias</h2>
-          <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-2xl mx-auto">
-            Se você entrar no curso e achar que a metodologia não é para você, basta enviar um único e-mail e devolveremos 100% do seu dinheiro. Sem perguntas, sem burocracia. <strong className="text-slate-900">O risco é todo meu.</strong>
+          <h2 className="text-4xl font-heading font-black text-blue-950 mb-6">Risco Absolutamente Zero</h2>
+          <p className="text-xl text-slate-600 mb-12 leading-relaxed max-w-2xl mx-auto font-medium">
+            Se você entrar no curso e achar que a metodologia não é para você, basta enviar um único e-mail em até 7 dias e devolveremos 100% do seu dinheiro. Sem perguntas, sem burocracia. <strong className="text-blue-950">O risco é todo meu.</strong>
           </p>
           
           <motion.button 
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="bg-red-600 hover:bg-red-700 text-white text-lg md:text-xl font-bold py-4 px-8 rounded-full shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 mx-auto w-full sm:w-auto"
+            className="bg-red-600 hover:bg-red-700 text-white text-xl font-heading font-black uppercase tracking-wide py-5 px-10 rounded-full shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_60px_-15px_rgba(220,38,38,0.7)] transition-all flex items-center justify-center gap-3 mx-auto w-full sm:w-auto"
           >
             {ctaText}
             <ArrowRight className="w-6 h-6" />
@@ -309,27 +343,45 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-12 text-center text-sm">
+      <footer className="bg-blue-950 text-blue-200 py-12 text-center text-sm border-t border-blue-900">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="relative flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl shadow-md">
-              <Plane className="w-6 h-6 text-white transform rotate-12" />
-              <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-red-600 rounded-full flex items-center justify-center border-2 border-slate-900 shadow-sm">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="relative flex items-center justify-center w-10 h-10 bg-white rounded-xl shadow-md">
+              <Plane className="w-6 h-6 text-blue-700 transform rotate-12" />
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-red-600 rounded-full flex items-center justify-center border-2 border-blue-950 shadow-sm">
                 <Zap className="w-3 h-3 text-white" fill="currentColor" />
               </div>
             </div>
             <div className="flex flex-col text-left">
-              <span className="font-extrabold text-sm leading-none tracking-tight text-slate-300 uppercase">Guia do</span>
-              <span className="font-black text-lg leading-none tracking-tight text-white uppercase">Viajante</span>
+              <span className="font-heading font-extrabold text-sm leading-none tracking-tight text-white uppercase">Guia do</span>
+              <span className="font-heading font-black text-lg leading-none tracking-tight text-red-400 uppercase">Viajante</span>
             </div>
           </div>
-          <p className="mb-4">© {new Date().getFullYear()} Teacher Hannah. Todos os direitos reservados.</p>
-          <div className="flex gap-4">
+          <p className="mb-6 font-medium">© {new Date().getFullYear()} Teacher Hannah. Todos os direitos reservados.</p>
+          <div className="flex gap-6 font-semibold">
             <a href="#" className="hover:text-white transition-colors">Termos de Uso</a>
             <a href="#" className="hover:text-white transition-colors">Política de Privacidade</a>
           </div>
         </div>
       </footer>
+
+      {/* Back to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, y: 20 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={scrollToTop}
+            className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 p-3 md:p-4 bg-blue-950 text-white rounded-full shadow-[0_0_20px_rgba(220,38,38,0.3)] border-2 border-red-600 hover:bg-blue-900 transition-colors group"
+            aria-label="Voltar ao topo"
+          >
+            <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
