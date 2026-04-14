@@ -91,9 +91,14 @@ export default function App() {
             <a href="#modulos" className="hover:text-red-600 transition-colors">Módulos</a>
             <a href="#sobre" className="hover:text-red-600 transition-colors">Sobre a Teacher</a>
           </div>
-          <button className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-full text-sm font-heading font-bold uppercase tracking-wide transition-all shadow-sm hover:shadow-md flex items-center gap-2">
+          <a 
+            href="https://pay.kiwify.com.br/H7Q4QQK" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-full text-sm font-heading font-bold uppercase tracking-wide transition-all shadow-sm hover:shadow-md flex items-center gap-2"
+          >
             Garantir Vaga
-          </button>
+          </a>
         </div>
       </header>
 
@@ -146,7 +151,7 @@ export default function App() {
             {!isVideoLoaded ? (
               <>
                 <img 
-                  src="https://img.youtube.com/vi/HtSGNBiCTqw/maxresdefault.jpg" 
+                  src="https://img.youtube.com/vi/HtSGNBiCTqw/hqdefault.jpg" 
                   alt="Video Thumbnail" 
                   className="w-full h-full object-cover opacity-80 group-hover:opacity-70 transition-opacity" 
                   referrerPolicy="no-referrer" 
@@ -175,7 +180,10 @@ export default function App() {
             Assista ao vídeo e descubra o método
           </p>
 
-          <motion.button 
+          <motion.a 
+            href="https://pay.kiwify.com.br/H7Q4QQK"
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -185,7 +193,7 @@ export default function App() {
           >
             {ctaText}
             <ArrowRight className="w-6 h-6" />
-          </motion.button>
+          </motion.a>
           
           <div className="mt-6 flex items-center justify-center gap-2 text-sm text-slate-600 font-semibold">
             <ShieldCheck className="w-5 h-5 text-blue-700" />
@@ -281,7 +289,7 @@ export default function App() {
               <div className="relative">
                 <div className="absolute inset-0 bg-red-600 rounded-[2rem] transform -translate-x-4 translate-y-4 opacity-20"></div>
                 <img 
-                  src="https://i.postimg.cc/7h6K4Pn9/Gemini-Generated-Image-rs4s2grs4s2grs4s-(1).png" 
+                  src="https://i.postimg.cc/VkHX009h/Gemini-Generated-Image-l3d477l3d477l3d4.png" 
                   alt="Teacher Hannah" 
                   className="relative rounded-[2rem] shadow-2xl object-cover w-full aspect-[3/4] border-4 border-blue-900"
                   referrerPolicy="no-referrer"
@@ -331,14 +339,17 @@ export default function App() {
             Se você entrar no curso e achar que a metodologia não é para você, basta enviar um único e-mail em até 7 dias e devolveremos 100% do seu dinheiro. Sem perguntas, sem burocracia. <strong className="text-blue-950">O risco é todo meu.</strong>
           </p>
           
-          <motion.button 
+          <motion.a 
+            href="https://pay.kiwify.com.br/H7Q4QQK"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="bg-red-600 hover:bg-red-700 text-white text-xl font-heading font-black uppercase tracking-wide py-5 px-10 rounded-full shadow-[0_0_40px_-10px_rgba(220,38,38,0.5)] hover:shadow-[0_0_60px_-15px_rgba(220,38,38,0.7)] transition-all flex items-center justify-center gap-3 mx-auto w-full sm:w-auto"
           >
             {ctaText}
             <ArrowRight className="w-6 h-6" />
-          </motion.button>
+          </motion.a>
         </div>
       </section>
 
